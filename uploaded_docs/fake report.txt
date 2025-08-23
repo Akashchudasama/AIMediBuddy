@@ -1,0 +1,149 @@
+Great! Here's a **4-page professional medical report template** for your **project/demo/assignment use**, featuring complete details like patient info, medical history, tests, treatment, and discharge summary.
+
+---
+
+## 🩺 **Page 1: Patient Information & Admission Details**
+
+**Hospital Name**: Galaxy Care Multispeciality Hospital
+**Address**: 104, University Road, Rajkot, Gujarat - 360007
+**Phone**: +91-98765XXXXX
+**Email**: [info@galaxycare.in](mailto:info@galaxycare.in)
+
+---
+
+### **Patient Details**
+
+* **Name**: Mr. Akash Chudasama
+* **Gender**: Male
+* **Age**: 23 Years
+* **Patient ID**: GC-20250804-001
+* **Date of Birth**: 10-Aug-2001
+* **Contact No.**: +91-9XXXXXXX45
+* **Blood Group**: B+
+* **Address**: 12/A, Galaxy Society, Rajkot, Gujarat
+
+---
+
+### **Admission Details**
+
+* **Date of Admission**: 01-Aug-2025
+* **Date of Discharge**: 04-Aug-2025
+* **Consultant Doctor**: Dr. R. Patel (General Physician)
+* **Reason for Admission**:
+  High fever, mild headache, body pain, and fatigue for 2 days.
+
+---
+
+## 🧪 **Page 2: Clinical Observations & Lab Tests**
+
+### **Vital Signs on Admission**
+
+| Vital            | Value          |
+| ---------------- | -------------- |
+| Temperature      | 102.5°F        |
+| Heart Rate       | 96 bpm         |
+| Blood Pressure   | 118/76 mmHg    |
+| Respiratory Rate | 18/min         |
+| SpO2             | 97% (Room Air) |
+| Weight           | 64 kg          |
+| Height           | 172 cm         |
+
+---
+
+### **Laboratory Investigations**
+
+| Test                | Result      | Normal Range | Interpretation |
+| ------------------- | ----------- | ------------ | -------------- |
+| CBC (WBC)           | 10,800/mm³  | 4,000–11,000 | Slightly High  |
+| Hemoglobin          | 13.5 g/dL   | 13–17        | Normal         |
+| Platelets           | 2.3 lakh/μL | 1.5–4.5      | Normal         |
+| Dengue NS1          | Negative    | -            | No Infection   |
+| Malaria Parasite    | Negative    | -            | No Infection   |
+| COVID-19 RT-PCR     | Negative    | -            | Ruled Out      |
+| Liver Function Test | Normal      | -            | Normal         |
+| Urine Routine       | Normal      | -            | Normal         |
+
+---
+
+## 💊 **Page 3: Treatment & Medication**
+
+### **Diagnosis**
+
+* Acute Viral Fever (Likely due to viral infection; no bacterial or vector-based findings)
+
+---
+
+### **Treatment Provided**
+
+* **Day 1:**
+
+  * IV Normal Saline 500ml
+  * Paracetamol 650mg IV
+  * Vitamin C Injection
+* **Day 2:**
+
+  * Oral Paracetamol 650mg (TDS)
+  * Multivitamin Tablets
+  * Oral Fluids
+
+---
+
+### **Medications on Discharge**
+
+| Medicine                      | Dosage       | Duration |
+| ----------------------------- | ------------ | -------- |
+| Paracetamol 650mg             | 1 Tablet TDS | 3 Days   |
+| Becosules (Vitamin B Complex) | 1 Tablet OD  | 5 Days   |
+| ORS Sachets                   | 1 daily      | 2 Days   |
+
+---
+
+### **Dietary Advice**
+
+* Soft and light food
+* Avoid spicy/oily food
+* Drink plenty of fluids
+* Rest for at least 2–3 days
+
+---
+
+## 📄 **Page 4: Discharge Summary & Follow-up**
+
+### **Final Diagnosis**
+
+* Viral Pyrexia (Acute Viral Fever)
+
+---
+
+### **Hospital Course Summary**
+
+Patient responded well to IV fluids and antipyretics. No signs of dengue, malaria, or COVID were observed. Body temperature stabilized within 36 hours. No further complications during stay. Vitals remained stable throughout admission.
+
+---
+
+### **Discharge Condition**
+
+* Afebrile for last 24 hours
+* Conscious, alert, stable
+* Fit to go home with medication
+
+---
+
+### **Follow-Up Instructions**
+
+* Visit OPD on **09-Aug-2025**
+* Repeat CBC if fever returns
+* Contact emergency if high fever or vomiting appears again
+
+---
+
+### **Doctor’s Signature**
+
+**Dr. R. Patel**
+General Medicine
+Reg No: GJ/4563/2020
+(Sign & Hospital Seal)
+
+---
+
+Let me know if you'd like this as a downloadable **Word/PDF file**, or if you want your own **logo, QR code, barcode, or digital stamp** added.
