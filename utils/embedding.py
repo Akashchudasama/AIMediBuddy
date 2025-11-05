@@ -1,61 +1,50 @@
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
-import numpy as np
-import faiss
-import pickle
-from sentence_transformers import SentenceTransformer
+import hashlib # For creating a unique hash based on file path
 
-# Load the sentence transformer model
-model = SentenceTransformer('all-MiniLM-L6-v2')
+# Initialize the embedding model
+# The embedding model is different from the chat model
+embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004") 
 
-# Ensure vector store directory exists
-if not os.path.exists("vector_store"):
-    os.makedirs("vector_store")
+def get_faiss_store_path(file_path):
+    """Creates a unique and deterministic path for the FAISS store."""
+    # Use a hash of the file path to ensure a unique store per document
+    file_hash = hashlib.md5(file_path.encode()).hexdigest()
+    return f"faiss_index_{file_hash}"
 
+def embed_and_store(text, file_path):
+    """Splits text, generates embeddings, and saves them to a FAISS vector store."""
+    
+    # 1. Split the text into manageable chunks
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len
+    )
+    chunks = text_splitter.split_text(text)
+    
+    # 2. Generate embeddings and create the FAISS store
+    vector_store = FAISS.from_texts(chunks, embeddings)
+    
+    # 3. Save the vector store locally (using a unique path)
+    store_path = get_faiss_store_path(file_path)
+    vector_store.save_local(store_path)
 
-def split_text_into_blocks(text, block_size=5):
-    """
-    Splits text into blocks of N lines each for better semantic meaning.
-    """
-    lines = [line.strip() for line in text.split('\n') if line.strip()]
-    blocks = ['\n'.join(lines[i:i + block_size]) for i in range(0, len(lines), block_size)]
-    return blocks
+def load_vector_store(file_path):
+    """Loads a FAISS vector store from disk."""
+    store_path = get_faiss_store_path(file_path)
+    if os.path.exists(store_path):
+        return FAISS.load_local(store_path, embeddings, allow_dangerous_deserialization=True)
+    return None
 
-
-def embed_and_store(text, doc_path):
-    """
-    Create and store FAISS index and text chunks from document.
-    """
-    chunks = split_text_into_blocks(text)
-    embeddings = model.encode(chunks)
-    embeddings = np.array(embeddings).astype('float32')
-
-    base_name = os.path.basename(doc_path).split('.')[0]
-    faiss.write_index(faiss.IndexFlatL2(embeddings.shape[1]), f"vector_store/{base_name}.index")
-    index = faiss.read_index(f"vector_store/{base_name}.index")
-    index.add(embeddings)
-
-    # Save FAISS index and corresponding text chunks
-    faiss.write_index(index, f"vector_store/{base_name}.index")
-    with open(f"vector_store/{base_name}_chunks.pkl", "wb") as f:
-        pickle.dump(chunks, f)
-
-
-def load_vector_store(doc_path):
-    """
-    Load FAISS index and chunks for given document.
-    """
-    base_name = os.path.basename(doc_path).split('.')[0]
-    index = faiss.read_index(f"vector_store/{base_name}.index")
-    with open(f"vector_store/{base_name}_chunks.pkl", "rb") as f:
-        chunks = pickle.load(f)
-    return index, chunks
-
-
-def retrieve_similar_chunks(query, doc_path, k=5):
-    """
-    Search FAISS index for top-k similar chunks to the query.
-    """
-    index, chunks = load_vector_store(doc_path)
-    query_embedding = model.encode([query]).astype('float32')
-    D, I = index.search(query_embedding, k)
-    return [chunks[i] for i in I[0] if i < len(chunks)]
+def retrieve_similar_chunks(query, file_path, k=4):
+    """Loads the vector store and retrieves the top-k most relevant text chunks."""
+    vector_store = load_vector_store(file_path)
+    if vector_store is not None:
+        # Uses similarity search to find relevant documents (chunks)
+        docs = vector_store.similarity_search(query, k=k)
+        # Return the content of the document objects
+        return [doc.page_content for doc in docs]
+    return []
