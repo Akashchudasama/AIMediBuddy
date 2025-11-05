@@ -1,8 +1,22 @@
 import streamlit as st
 import os
 from utils.parser import extract_text_from_file
-from utils.embedding import embed_and_store, load_vector_store, retrieve_similar_chunks
+from utils.embedding import embed_and_store, retrieve_similar_chunks
 from utils.query import query_llm
+from google import genai # Import genai for API key setup
+
+# --- Configuration ---
+# Set the API Key from Streamlit Secrets or Environment Variable
+# You MUST set GEMINI_API_KEY as an environment variable or in a .streamlit/secrets.toml file
+# st.session_state is used to prevent the setup from running on every rerun
+if "api_key_set" not in st.session_state:
+    try:
+        genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+        st.session_state["api_key_set"] = True
+    except Exception as e:
+        st.error(f"Error configuring Gemini API: {e}. Please ensure the GEMINI_API_KEY environment variable is set.")
+        st.stop()
+# ---
 
 st.title("🧠 Medical Document Q&A (RAG)")
 
@@ -20,16 +34,26 @@ if uploaded_file:
 
     st.success(f"File '{uploaded_file.name}' uploaded successfully.")
 
-    # ✅ Extract text and embed
-    text = extract_text_from_file(file_path)
-    embed_and_store(text, file_path)
+    try:
+        # ✅ Extract text and embed
+        with st.spinner("Processing document..."):
+            text = extract_text_from_file(file_path)
+            embed_and_store(text, file_path)
+        st.success("Document processed and embedded.")
+    except Exception as e:
+        st.error(f"Error during document processing/embedding: {e}")
+
 
 if query and uploaded_file:
-    # ✅ Retrieve relevant chunks
-    chunks = retrieve_similar_chunks(query, file_path)
+    try:
+        with st.spinner("Finding answer..."):
+            # ✅ Retrieve relevant chunks
+            chunks = retrieve_similar_chunks(query, file_path)
 
-    # ✅ Query the LLM
-    response = query_llm(query, chunks)
+            # ✅ Query the LLM
+            response = query_llm(query, chunks)
 
-    st.markdown("### 🩺 Answer:")
-    st.write(response)
+        st.markdown("### 🩺 Answer:")
+        st.write(response)
+    except Exception as e:
+        st.error(f"Error during query: {e}")
