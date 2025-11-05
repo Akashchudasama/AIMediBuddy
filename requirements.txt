@@ -1,23 +1,13 @@
-# Core Streamlit application
-streamlit
-
-# Gemini/Generative AI integration
-google-genai
-
 # LangChain components for RAG
-langchain
+langchain 
 langchain-core
-langchain-text-splitters
-
-# LangChain specific providers for Gemini embeddings
+langchain-text-splitter # This should install the required module
 langchain-google-genai
-
-# LangChain specific provider for the FAISS vector store (fixes ModuleNotFoundError)
 langchain-community
 
-# Vector store backend
+# Other necessary dependencies...
+streamlit
+google-genai
 faiss-cpu
-
-# Document parsing libraries
 pypdf
 python-docx
